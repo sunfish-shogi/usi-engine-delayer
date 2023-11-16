@@ -8,6 +8,16 @@ usi-engine-delayer は USI (Universal Shogi Interface) プロトコルのコマ�
 
 ## 使用方法
 
+### 必要なもの
+
+Go 言語実行環境
+
+### インストール
+
+```
+go install github.com/sunfish-shogi/usi-engine-delayer@main
+```
+
 ### 設定ファイルを使用する場合
 
 `-config` で設定ファイルのパスを指定します。省略するとカレントディレクトリの `config.json` を参照します。
@@ -16,11 +26,17 @@ usi-engine-delayer は USI (Universal Shogi Interface) プロトコルのコマ�
 ```json
 {
   "exePath": "C:\\Users\\GuestUser\\MyEngines\\Lesserkai.exe",
-  "delaySeconds": 10
+  "delaySeconds": 5
 }
 ```
+
+なお、 `-exe` オプションが指定された場合は設定ファイルを参照しません。
 
 ### 引数で設定値を渡す場合
 
 - `-exe` - エンジンのパスを指定します。
 - `-delay` - bestmove コマンドの遅延秒数を指定します。
+
+```
+usi-engine-delayer.exe -delay 5 -exe "C:\Users\GuestUser\MyEngines\Lesserkai.exe"
+```
