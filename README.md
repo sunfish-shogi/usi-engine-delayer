@@ -40,5 +40,5 @@ go install github.com/sunfish-shogi/usi-engine-delayer@main
 エンジンと同じディレクトリに bat ファイルを設置する場合は、例えば次のように記述します。
 
 ```bat
-usi-engine-delayer -exe %~dp0\Lesserkai.exe -delay 5
+usi-engine-delayer -exe %~dp0Lesserkai.exe -delay 5
 ```
