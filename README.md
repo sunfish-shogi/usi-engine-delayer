@@ -26,7 +26,8 @@ go install github.com/sunfish-shogi/usi-engine-delayer@main
 ```json
 {
   "exePath": "C:\\Users\\GuestUser\\MyEngines\\Lesserkai.exe",
-  "delaySeconds": 5
+  "delaySeconds": 5,
+  "name": "Lesserkay Delay-5s"
 }
 ```
 
@@ -36,6 +37,7 @@ go install github.com/sunfish-shogi/usi-engine-delayer@main
 
 - `-exe` - エンジンのパスを指定します。
 - `-delay` - bestmove コマンドの遅延秒数を指定します。
+- `-name` - エンジン名を上書きする場合にその名前を指定します。
 
 エンジンと同じディレクトリに bat ファイルを設置する場合は、例えば次のように記述します。
 

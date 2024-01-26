@@ -16,6 +16,7 @@ const DefaultConfigPath = "config.json"
 type Config struct {
 	ExePath      string
 	DelaySeconds float64
+	Name         string
 }
 
 func main() {
@@ -24,6 +25,7 @@ func main() {
 	flag.StringVar(&customConfigPath, "config", "", "config file path")
 	flag.StringVar(&config.ExePath, "exe", "", "engine exe path")
 	flag.Float64Var(&config.DelaySeconds, "delay", 0, "delay seconds")
+	flag.StringVar(&config.Name, "name", "", "engine name")
 	flag.Parse()
 	if customConfigPath != "" {
 		config = loadConfig(customConfigPath)
@@ -50,8 +52,12 @@ func main() {
 			} else if err != nil {
 				panic(err)
 			}
-			if !hasPrefix && strings.HasPrefix(string(line), "bestmove ") {
-				time.Sleep(time.Duration(config.DelaySeconds * float64(time.Second)))
+			if !hasPrefix {
+				if strings.HasPrefix(string(line), "id name ") && config.Name != "" {
+					line = []byte("id name " + config.Name)
+				} else if strings.HasPrefix(string(line), "bestmove ") {
+					time.Sleep(time.Duration(config.DelaySeconds * float64(time.Second)))
+				}
 			}
 			os.Stdout.Write(line)
 			if !prefix {
