@@ -18,6 +18,25 @@ Go 言語実行環境
 go install github.com/sunfish-shogi/usi-engine-delayer@main
 ```
 
+### 引数で設定値を渡す場合
+
+- `-exe` - エンジンのパスを指定します。
+- `-delay` - bestmove コマンドの遅延秒数を指定します。
+- `-name` - エンジン名を上書きする場合にその名前を指定します。
+
+エンジンと同じディレクトリに bat ファイルを設置する場合は、例えば次のように記述します。
+
+```bat
+usi-engine-delayer -exe %~dp0Lesserkai.exe -delay 5
+```
+
+macOS や Linux でシェルスクリプトを設定する場合は次のように記述します。
+
+```sh
+#!/bin/bash -eu
+$HOME/go/bin/usi-engine-delayer -exe $(cd $(dirname $0); pwd)/YaneuraOu -delay 3
+```
+
 ### 設定ファイルを使用する場合
 
 `-config` で設定ファイルのパスを指定します。省略するとカレントディレクトリの `config.json` を参照します。
@@ -32,15 +51,3 @@ go install github.com/sunfish-shogi/usi-engine-delayer@main
 ```
 
 なお、 `-exe` オプションが指定された場合は設定ファイルを参照しません。
-
-### 引数で設定値を渡す場合
-
-- `-exe` - エンジンのパスを指定します。
-- `-delay` - bestmove コマンドの遅延秒数を指定します。
-- `-name` - エンジン名を上書きする場合にその名前を指定します。
-
-エンジンと同じディレクトリに bat ファイルを設置する場合は、例えば次のように記述します。
-
-```bat
-usi-engine-delayer -exe %~dp0Lesserkai.exe -delay 5
-```
