@@ -44,26 +44,19 @@ func main() {
 	}
 	go func() {
 		r := bufio.NewReader(stdout)
-		hasPrefix := false
 		for {
-			line, prefix, err := r.ReadLine()
+			line, err := r.ReadBytes('\n')
 			if err == io.EOF {
 				break
 			} else if err != nil {
 				panic(err)
 			}
-			if !hasPrefix {
-				if strings.HasPrefix(string(line), "id name ") && config.Name != "" {
-					line = []byte("id name " + config.Name)
-				} else if strings.HasPrefix(string(line), "bestmove ") {
-					time.Sleep(time.Duration(config.DelaySeconds * float64(time.Second)))
-				}
+			if strings.HasPrefix(string(line), "id name ") && config.Name != "" {
+				line = []byte("id name " + config.Name)
+			} else if strings.HasPrefix(string(line), "bestmove ") {
+				time.Sleep(time.Duration(config.DelaySeconds * float64(time.Second)))
 			}
 			os.Stdout.Write(line)
-			if !prefix {
-				os.Stdout.Write([]byte{'\n'})
-			}
-			hasPrefix = prefix
 		}
 	}()
 	go func() {
